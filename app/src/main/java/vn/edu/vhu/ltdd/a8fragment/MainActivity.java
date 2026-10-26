@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Chuyển tab sang: " + f.getClass().getSimpleName());
         getSupportFragmentManager()
                 .beginTransaction()
+                // NC4: Thêm hiệu ứng chuyển Fragment mượt mà giữa các tab (Fade In / Fade Out)
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(R.id.fragmentContainer, f)
                 .setReorderingAllowed(true)
                 .commit();

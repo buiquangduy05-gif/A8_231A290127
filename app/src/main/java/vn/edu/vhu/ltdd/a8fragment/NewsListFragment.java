@@ -76,16 +76,23 @@ public class NewsListFragment extends Fragment {
         boolean isTablet = getActivity() != null && getActivity().findViewById(R.id.detailContainer) != null;
 
         if (isTablet) {
-            // Chế độ tablet: hiển thị ở khung detail bên phải, không cần addToBackStack
+            // Chế độ tablet: hiệu ứng fade nhẹ nhàng khi đổi nội dung ở khung bên phải
             getParentFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                     .replace(R.id.detailContainer, f)
                     .setReorderingAllowed(true)
                     .commit();
         } else {
-            // Chế độ điện thoại: hiển thị toàn màn hình, đưa vào back stack để quay lại
+            // Chế độ điện thoại: NC4 - Hiệu ứng trượt ngang mượt mà (slide in/out cả lúc mở và lúc back lại)
             getParentFragmentManager()
                     .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.slide_in_right,
+                            R.anim.slide_out_left,
+                            R.anim.slide_in_left,
+                            R.anim.slide_out_right
+                    )
                     .replace(R.id.fragmentContainer, f)
                     .addToBackStack("chi_tiet")
                     .setReorderingAllowed(true)
